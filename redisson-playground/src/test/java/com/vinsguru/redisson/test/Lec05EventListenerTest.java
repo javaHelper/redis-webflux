@@ -8,6 +8,7 @@ import org.redisson.client.codec.StringCodec;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class Lec05EventListenerTest extends BaseTest {
@@ -15,7 +16,7 @@ public class Lec05EventListenerTest extends BaseTest {
     @Test
     public void expiredEventTest(){
         RBucketReactive<String> bucket = this.client.getBucket("user:1:name", StringCodec.INSTANCE);
-        Mono<Void> set = bucket.set("sam", 10, TimeUnit.SECONDS);
+        Mono<Void> set = bucket.set("sam", Duration.ofSeconds(10));
         Mono<Void> get = bucket.get()
                 .doOnNext(System.out::println)
                 .then();

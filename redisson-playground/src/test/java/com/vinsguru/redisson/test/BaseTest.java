@@ -19,7 +19,7 @@ public abstract class BaseTest {
 
     @AfterAll
     public void shutdown(){
-        this.client.shutdown();
+        this.redissonConfig.getClient().shutdown();
     }
 
     protected void sleep(long millis){
